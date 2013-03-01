@@ -2,7 +2,8 @@
 
 module Quesadilla
   class Extractor
-    Dir[File.expand_path('../client/*.rb', __FILE__)].each { |f| require f }
+    require 'quesadilla/core_ext/string'
+    Dir[File.expand_path('../extractor/*.rb', __FILE__)].each { |f| require f }
 
     include Autolinks
     include Emoji
@@ -16,7 +17,6 @@ module Quesadilla
     DEFAULT_OPTIONS = {
       :markdown => true,
       :markdown_code => true,
-      :markdown_email => true,
       :markdown_links => true,
       :markdown_bold_italic => true,
       :markdown_bold => true,
@@ -36,15 +36,15 @@ module Quesadilla
       @original_text = original_text.dup
 
       # Emoji colon-syntax
-      replace_emoji if options[:emoji]
+      replace_emoji if @options[:emoji]
 
       @working_text = @original_text.dup
       @entities = []
 
       # Get entities
-      extract_markdown if options[:markdown]
-      extract_hashtags if options[:hashtags]
-      extract_autolinks if options[:autolinks]
+      extract_markdown if @options[:markdown]
+      extract_hashtags if @options[:hashtags]
+      extract_autolinks if @options[:autolinks]
 
       # Sort entities
       @entities.sort! do |a, b|
@@ -59,14 +59,14 @@ module Quesadilla
         display_text: display_text,
         entities: @entities
       }
-      hash[:display_html] = display_html(display_text, @entities) if options[:html]
+      hash[:display_html] = display_html(display_text, @entities) if @options[:html]
       hash
     end
 
   private
 
     def display_url(url)
-      url = url.gsub(/(?:https?:\/\/)?(?:www\.)?/i, '').truncate(32, omission: '…')
+      url = url.gsub(/(?:https?:\/\/)?(?:www\.)?/i, '').q_truncate(32, omission: '…')
       url = url[0...(url.length - 1)] if url[-1, 1] == '/'
       url
     end

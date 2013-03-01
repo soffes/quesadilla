@@ -3,6 +3,8 @@
 module Quesadilla
   class Extractor
     module Emoji
+      require 'named_emoji'
+
       # Emoji colon-syntax regex
       EMOJI_COLON_REGEX = %r{:([a-zA-Z0-9_\-\+]+):}
 
@@ -11,7 +13,7 @@ module Quesadilla
 
         # Replace codes with shas
         i = 0
-        while match = @original_text.match(CODE_REGEX)
+        while match = @original_text.match(Markdown::CODE_REGEX)
           original = match[0]
           key = Digest::SHA1.hexdigest("#{original}-#{i}")
           codes[key] = original

@@ -9,7 +9,7 @@ module Quesadilla
         Twitter::Extractor::extract_urls_with_indices(@working_text).each do |entity|
           entity_text = entity[:url]
           @entities << {
-            type: 'link',
+            type: ENTITY_TYPE_LINK,
             text: entity_text,
             display_text: display_url(entity[:url]),
             url: quality_url(entity[:url]),

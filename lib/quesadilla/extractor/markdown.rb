@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-module Queadilla
+module Quesadilla
   class Extractor
     module Markdown
       # Gruber's regex is recursive, but I can't figure out how to do it in Ruby without the `g` option.
@@ -62,13 +62,18 @@ module Queadilla
       CODE_REGEX = %r{ (`+) (.+?) (?<!`) \1 (?!`) }x
 
       def extract_markdown
-        extract_markdown_code if options[:markdown_code]
-        extract_markdown_autolink_email if options[:markdown_email]
-        extract_markdown_links if options[:markdown_links]
-        extract_markdown_span(BOLD_ITALIC_REGEX, 'triple_emphasis') if options[:markdown_bold_italic]
-        extract_markdown_span(BOLD_REGEX, 'double_emphasis') if options[:markdown_bold]
-        extract_markdown_span(ITALIC_REGEX, 'emphasis') if options[:markdown_italic]
-        extract_markdown_span(STRIKETHROUGH_REGEX, 'strikethrough') if options[:markdown_strikethrough]
+        extract_markdown_code if @options[:markdown_code]
+
+        if @options[:markdown_links]
+          extract_markdown_autolink_links
+          extract_markdown_autolink_email
+          extract_markdown_links
+        end
+
+        extract_markdown_span(BOLD_ITALIC_REGEX, ENTITY_TYPE_TRIPLE_EMPHASIS) if @options[:markdown_bold_italic]
+        extract_markdown_span(BOLD_REGEX, ENTITY_TYPE_DOUBLE_EMPHASIS) if @options[:markdown_bold]
+        extract_markdown_span(ITALIC_REGEX, ENTITY_TYPE_EMPHASIS) if @options[:markdown_italic]
+        extract_markdown_span(STRIKETHROUGH_REGEX, ENTITY_TYPE_STRIKETHROUGH) if @options[:markdown_strikethrough]
       end
 
     private
@@ -126,7 +131,7 @@ module Queadilla
 
           # Create the entity
           entity = {
-            type: 'link',
+            type: ENTITY_TYPE_LINK,
             text: original,
             indices: [
               start,
@@ -145,6 +150,14 @@ module Queadilla
         end
       end
 
+      def extract_markdown_autolink_links
+        extract_markdown_autolink AUTOLINK_LINK_REGEX do |entity, match|
+          entity[:url] = match[1]
+          entity[:display_text] = display_url(match[1])
+          entity
+        end
+      end
+
       def extract_markdown_autolink_email
         extract_markdown_autolink AUTOLINK_EMAIL_REGEX do |entity, match|
           email = match[1]
@@ -155,7 +168,7 @@ module Queadilla
       end
 
       def extract_markdown_links
-        extract_markdown_span(LINK_REGEX, 'link') do |entity, match|
+        extract_markdown_span(LINK_REGEX, ENTITY_TYPE_LINK) do |entity, match|
           # Add the URL
           entity[:url] = match[3]
 

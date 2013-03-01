@@ -51,19 +51,19 @@ module Quesadilla
       def html_entity(entity)
          display_text = html_pre_escape(entity[:display_text])
          case entity[:type]
-         when 'emphasis'
+         when ENTITY_TYPE_EMPHASIS
            "<em>#{display_text}</em>"
-         when 'double_emphasis'
+         when ENTITY_TYPE_DOUBLE_EMPHASIS
            "<strong>#{display_text}</strong>"
-         when 'triple_emphasis'
+         when ENTITY_TYPE_TRIPLE_EMPHASIS
            "<strong><em>#{display_text}</em></strong>"
-         when 'strikethrough'
+         when ENTITY_TYPE_STRIKETHROUGH
            "<del>#{display_text}</del>"
-         when 'code'
+         when ENTITY_TYPE_CODE
            "<code>#{display_text}</code>"
-         when 'tag'
-           "<a href=\"#tag-#{html_pre_escape(entity[:tag_name])}\" class=\"tag\">#{display_text}</a>"
-         when 'link'
+         when ENTITY_TYPE_HASHTAG
+           "<a href=\"#hashtag-#{html_pre_escape(entity[:hashtag])}\" class=\"tag\">#{display_text}</a>"
+         when ENTITY_TYPE_LINK
            title = (entity[:title] and entity[:title].length > 0) ? " title=\"#{html_escape(entity[:title])}\"" : ''
            "<a href=\"#{entity[:url]}\" rel=\"external nofollow\" class=\"link\"#{title}>#{display_text}</a>"
          else

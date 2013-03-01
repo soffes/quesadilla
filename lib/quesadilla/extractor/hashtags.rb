@@ -9,11 +9,11 @@ module Quesadilla
         Twitter::Extractor::extract_hashtags_with_indices(@working_text).each do |entity|
           entity_text = "##{entity[:hashtag]}"
           @entities << {
-            type: 'hashtag',
+            type: ENTITY_TYPE_HASHTAG,
             text: entity_text,
             display_text: entity_text,
             indices: entity[:indices],
-            tag_name: entity[:hashtag].downcase
+            hashtag: entity[:hashtag].downcase
           }
           @working_text.sub!(entity_text, REPLACE_TOKEN * entity_text.length)
         end

@@ -16,13 +16,13 @@ module Quesadilla
       extraction = extract('Something #tagged with 👨 beardface')
       assert_equal extraction, {
         display_text: 'Something #tagged with 👨 beardface',
-        display_html: 'Something <a href="#tag-tagged" class="tag">#tagged</a> with 👨 beardface',
+        display_html: 'Something <a href="#hashtag-tagged" class="tag">#tagged</a> with 👨 beardface',
         entities: [
           {
-            type: 'tag',
+            type: 'hashtag',
             text: '#tagged',
             display_text: '#tagged',
-            tag_name: 'tagged',
+            hashtag: 'tagged',
             indices: [10, 17],
             display_indices: [10, 17]
           }
@@ -32,14 +32,14 @@ module Quesadilla
       extraction = extract('After 💇 #foo 👮 **Yep**')
       assert_equal extraction, {
         display_text: 'After 💇 #foo 👮 Yep',
-        display_html: 'After 💇 <a href="#tag-foo" class="tag">#foo</a> 👮 <strong>Yep</strong>',
+        display_html: 'After 💇 <a href="#hashtag-foo" class="tag">#foo</a> 👮 <strong>Yep</strong>',
         entities: [
           {
-            type: 'tag',
+            type: 'hashtag',
             text: '#foo',
             display_text: '#foo',
             indices: [8, 12],
-            tag_name: 'foo',
+            hashtag: 'foo',
             display_indices: [8, 12]
           },
           {
@@ -79,13 +79,13 @@ module Quesadilla
       # extraction = extract('Something #tagged with :man: **beardface**')
       # assert_equal extraction, {
       #   display_text: 'Something #tagged with 👨 beardface',
-      #   display_html: 'Something <a href="#tag-tagged" class="tag">#tagged</a> with 👨 <strong>beardface</strong>',
+      #   display_html: 'Something <a href="#hashtag-tagged" class="tag">#tagged</a> with 👨 <strong>beardface</strong>',
       #   entities: [
       #     {
-      #       type: 'tag',
+      #       type: 'hashtag',
       #       text: '#tagged',
       #       display_text: '#tagged',
-      #       tag_name: 'tagged',
+      #       hashtag: 'tagged',
       #       indices: [10, 17],
       #       display_indices: [10, 17]
       #     },
