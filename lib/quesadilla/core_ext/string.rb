@@ -9,15 +9,20 @@ class String
   def q_truncate(truncate_at, options = {})
     return dup unless length > truncate_at
 
+    # Default omission to '...'
     options[:omission] ||= '...'
-    length_with_room_for_omission = truncate_at - options[:omission].length
-    stop = \
-      if options[:separator]
-        rindex(options[:separator], length_with_room_for_omission) || length_with_room_for_omission
-      else
-        length_with_room_for_omission
-      end
 
+    # Account for the omission string in the truncated length
+    truncate_at -= options[:omission].length
+
+    # Calculate end index
+    stop = if options[:separator]
+      rindex(options[:separator], truncate_at) || truncate_at
+    else
+      truncate_at
+    end
+
+    # Return the trucnated string plus the omission string
     self[0...stop] + options[:omission]
   end
 end
