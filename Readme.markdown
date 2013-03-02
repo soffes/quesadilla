@@ -112,7 +112,7 @@ Assuming there is a user named `soffes` in your database, it would extract `@sof
 
 ## Supported Ruby Versions
 
-Quesadilla is tested under 1.9.2, 1.9.3, 2.0.0, JRuby (1.9 mode), and Rubinius (1.9 mode).
+Quesadilla is tested under 1.9.2, 1.9.3, 2.0.0, JRuby 1.7.2 (1.9 mode), and Rubinius 2.0.0 (1.9 mode).
 
 [![Build Status](https://travis-ci.org/soffes/quesadilla.png?branch=master)](https://travis-ci.org/soffes/quesadilla)
 
