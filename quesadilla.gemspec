@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ['Sam Soffes']
   gem.email         = ['sam@soff.es']
   gem.description   = 'Entity-style text parsing'
-  gem.summary       = gem.description
+  gem.summary       = 'Entity-style text parsing extracted from Cheddar'
   gem.homepage      = 'https://github.com/soffes/quesadilla'
   gem.license       = 'MIT'
 
@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ['lib']
 
-  gem.required_ruby_version = '>= 1.9.3'
+  gem.required_ruby_version = '>= 1.9.2'
 
   # Hashtag and autolink parsing
   gem.add_dependency 'twitter-text', '~> 1.5.0'
