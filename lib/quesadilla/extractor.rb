@@ -15,18 +15,18 @@ module Quesadilla
     # @return [Hash] default extractor options
     def self.default_options
       {
-        :markdown => true,
-        :markdown_code => true,
-        :markdown_links => true,
-        :markdown_triple_emphasis => true,
-        :markdown_double_emphasis => true,
-        :markdown_emphasis => true,
-        :markdown_strikethrough => true,
-        :hashtags => true,
-        :autolinks => true,
-        :emoji => true,
-        :html => true,
-        :html_renderer => Quesadilla::HTMLRenderer
+        markdown: true,
+        markdown_code: true,
+        markdown_links: true,
+        markdown_triple_emphasis: true,
+        markdown_double_emphasis: true,
+        markdown_emphasis: true,
+        markdown_strikethrough: true,
+        hashtags: true,
+        autolinks: true,
+        emoji: true,
+        html: true,
+        html_renderer: Quesadilla::HTMLRenderer
       }
     end
 
