@@ -54,10 +54,10 @@ module Quesadilla
     end
 
     # Extract entities from text
-    # @param original_text the text to extract from
+    # @param text [String] the text to extract from
     # @return [Hash] hash containing the display text, html text, and entities
-    def extract(original_text)
-      @original_text = original_text.dup
+    def extract(text)
+      @original_text = text.dup
 
       # Emoji colon-syntax
       replace_emoji if @options[:emoji]
