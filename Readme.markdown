@@ -93,7 +93,7 @@ extraction = Quesadilla.extract('Some #awesome text', html_renderer: CustomRende
 extraction[:display_html] #=> 'Some <a href="http://example.com/tags/awesome" class="tag">#awesome</a> text'
 ```
 
-Take a look at [Quesadilla::HTMLRenderer](lib/quesadilla/html_renderer.html) for more details on creating a custom renderer.
+Take a look at [Quesadilla::HTMLRenderer](lib/quesadilla/html_renderer.rb) for more details on creating a custom renderer.
 
 ### Users
 
