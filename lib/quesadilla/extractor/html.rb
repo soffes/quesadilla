@@ -49,26 +49,26 @@ module Quesadilla
       end
 
       def html_entity(entity)
-         display_text = html_pre_escape(entity[:display_text])
-         case entity[:type]
-         when ENTITY_TYPE_EMPHASIS
-           "<em>#{display_text}</em>"
-         when ENTITY_TYPE_DOUBLE_EMPHASIS
-           "<strong>#{display_text}</strong>"
-         when ENTITY_TYPE_TRIPLE_EMPHASIS
-           "<strong><em>#{display_text}</em></strong>"
-         when ENTITY_TYPE_STRIKETHROUGH
-           "<del>#{display_text}</del>"
-         when ENTITY_TYPE_CODE
-           "<code>#{display_text}</code>"
-         when ENTITY_TYPE_HASHTAG
-           "<a href=\"#{@options[:hashtag_url_format].sub('HASHTAG', html_pre_escape(entity[:hashtag]))}\" class=\"#{@options[:hashtag_class_name]}\">#{display_text}</a>"
-         when ENTITY_TYPE_LINK
-           title = (entity[:title] and entity[:title].length > 0) ? " title=\"#{html_escape(entity[:title])}\"" : ''
-           "<a href=\"#{entity[:url]}\" rel=\"external nofollow\" class=\"link\"#{title}>#{display_text}</a>"
-         else
-           html_pre_escape(entity[:text])
-         end
+        display_text = html_pre_escape(entity[:display_text])
+        case entity[:type]
+        when ENTITY_TYPE_EMPHASIS
+          @renderer.emphasis(display_text)
+        when ENTITY_TYPE_DOUBLE_EMPHASIS
+          @renderer.double_emphasis(display_text)
+        when ENTITY_TYPE_TRIPLE_EMPHASIS
+          @renderer.triple_emphasis(display_text)
+        when ENTITY_TYPE_STRIKETHROUGH
+          @renderer.strikethrough(display_text)
+        when ENTITY_TYPE_CODE
+          @renderer.code(display_text)
+        when ENTITY_TYPE_HASHTAG
+          @renderer.hashtag(display_text, html_pre_escape(entity[:hashtag]))
+        when ENTITY_TYPE_LINK
+          @renderer.link(display_text, entity[:url], html_pre_escape(entity[:title]))
+        else
+          # Catchall
+          html_pre_escape(entity[:text])
+        end
       end
 
       # Pre-escape. Convert bad characters to high UTF-8 characters

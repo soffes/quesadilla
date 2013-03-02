@@ -14,24 +14,28 @@ module Quesadilla
     # Invisible character from the reserved range replaces markdown we've already parsed.
     REPLACE_TOKEN = "\uf042"
 
-    DEFAULT_OPTIONS = {
-      :markdown => true,
-      :markdown_code => true,
-      :markdown_links => true,
-      :markdown_bold_italic => true,
-      :markdown_bold => true,
-      :markdown_italic => true,
-      :markdown_strikethrough => true,
-      :hashtags => true,
-      :hashtag_url_format => '#hashtag-HASHTAG',
-      :hashtag_class_name => 'hashtag',
-      :autolinks => true,
-      :emoji => true,
-      :html => true
-    }
+    def self.default_options
+      {
+        :markdown => true,
+        :markdown_code => true,
+        :markdown_links => true,
+        :markdown_bold_italic => true,
+        :markdown_bold => true,
+        :markdown_italic => true,
+        :markdown_strikethrough => true,
+        :hashtags => true,
+        :hashtag_url_format => '#hashtag-HASHTAG',
+        :hashtag_class_name => 'hashtag',
+        :autolinks => true,
+        :emoji => true,
+        :html => true,
+        :html_renderer => Quesadilla::HTMLRenderer
+      }
+    end
 
     def initialize(options = {})
-      @options = DEFAULT_OPTIONS.merge(options)
+      @options = self.class.default_options.merge(options)
+      @renderer = @options[:html_renderer].new if @options[:html]
     end
 
     def extract(original_text)

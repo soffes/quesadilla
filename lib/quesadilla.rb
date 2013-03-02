@@ -1,4 +1,5 @@
 require 'quesadilla/version'
+require 'quesadilla/html_renderer'
 require 'quesadilla/extractor'
 
 module Quesadilla
