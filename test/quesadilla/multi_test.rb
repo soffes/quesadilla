@@ -7,7 +7,7 @@ module Quesadilla
       extraction = extract('Something #tagged with a link http://samsoff.es/posts/hire-sam')
       assert_equal extraction, {
         display_text: 'Something #tagged with a link samsoff.es/posts/hire-sam',
-        display_html: 'Something <a href="#hashtag-tagged" class="tag">#tagged</a> with a link <a href="http://samsoff.es/posts/hire-sam" rel="external nofollow" class="link">samsoff.es&#x2F;posts&#x2F;hire-sam</a>',
+        display_html: 'Something <a href="#hashtag-tagged" class="hashtag">#tagged</a> with a link <a href="http://samsoff.es/posts/hire-sam" rel="external nofollow" class="link">samsoff.es&#x2F;posts&#x2F;hire-sam</a>',
         entities: [
           {
             type: 'hashtag',

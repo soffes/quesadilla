@@ -23,6 +23,8 @@ module Quesadilla
       :markdown_italic => true,
       :markdown_strikethrough => true,
       :hashtags => true,
+      :hashtag_url_format => '#hashtag-HASHTAG',
+      :hashtag_class_name => 'hashtag',
       :autolinks => true,
       :emoji => true,
       :html => true

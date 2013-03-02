@@ -62,7 +62,7 @@ module Quesadilla
          when ENTITY_TYPE_CODE
            "<code>#{display_text}</code>"
          when ENTITY_TYPE_HASHTAG
-           "<a href=\"#hashtag-#{html_pre_escape(entity[:hashtag])}\" class=\"tag\">#{display_text}</a>"
+           "<a href=\"#{@options[:hashtag_url_format].sub('HASHTAG', html_pre_escape(entity[:hashtag]))}\" class=\"#{@options[:hashtag_class_name]}\">#{display_text}</a>"
          when ENTITY_TYPE_LINK
            title = (entity[:title] and entity[:title].length > 0) ? " title=\"#{html_escape(entity[:title])}\"" : ''
            "<a href=\"#{entity[:url]}\" rel=\"external nofollow\" class=\"link\"#{title}>#{display_text}</a>"

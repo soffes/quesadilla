@@ -16,7 +16,7 @@ module Quesadilla
       extraction = extract('Something #tagged with 👨 beardface')
       assert_equal extraction, {
         display_text: 'Something #tagged with 👨 beardface',
-        display_html: 'Something <a href="#hashtag-tagged" class="tag">#tagged</a> with 👨 beardface',
+        display_html: 'Something <a href="#hashtag-tagged" class="hashtag">#tagged</a> with 👨 beardface',
         entities: [
           {
             type: 'hashtag',
@@ -32,7 +32,7 @@ module Quesadilla
       extraction = extract('After 💇 #foo 👮 **Yep**')
       assert_equal extraction, {
         display_text: 'After 💇 #foo 👮 Yep',
-        display_html: 'After 💇 <a href="#hashtag-foo" class="tag">#foo</a> 👮 <strong>Yep</strong>',
+        display_html: 'After 💇 <a href="#hashtag-foo" class="hashtag">#foo</a> 👮 <strong>Yep</strong>',
         entities: [
           {
             type: 'hashtag',
@@ -79,7 +79,7 @@ module Quesadilla
       # extraction = extract('Something #tagged with :man: **beardface**')
       # assert_equal extraction, {
       #   display_text: 'Something #tagged with 👨 beardface',
-      #   display_html: 'Something <a href="#hashtag-tagged" class="tag">#tagged</a> with 👨 <strong>beardface</strong>',
+      #   display_html: 'Something <a href="#hashtag-tagged" class="hashtag">#tagged</a> with 👨 <strong>beardface</strong>',
       #   entities: [
       #     {
       #       type: 'hashtag',
