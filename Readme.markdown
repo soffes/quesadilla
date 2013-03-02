@@ -46,19 +46,19 @@ Quesadilla.extract('Some #awesome text')
 
 Quesadilla supports extracting various span-level Markdown features as well as automatically detecting links and GitHub-style named emoji. Here are the list of options you can pass when extracting:
 
-Option                    | Description
---------------------------|------------
-`:markdown`               | All Markdown parsing
-`:markdown_code`          | Markdown code tags
-`:markdown_links`         | Markdown links (including `<http://soff.es>` style links)
-`:markdown_bold_italic`   | Markdown bold italic
-`:markdown_bold`          | Markdown bold
-`:markdown_italic`        | Markdown italic
-`:markdown_strikethrough` | Markdown Extra strikethrough
-`:hashtags`               | Hashtags
-`:autolinks`              | Automatically detect links
-`:emoji`                  | GitHub-style named emoji
-`:html`                   | Generate HTML representations for entities and the entire string
+Option                      | Description
+----------------------------|-----------------------------------------------------------------
+`:markdown`                 | All Markdown parsing
+`:markdown_code`            | Markdown code tags
+`:markdown_links`           | Markdown links (including `<http://soff.es>` style links)
+`:markdown_triple_emphasis` | Markdown bold italic
+`:markdown_double_emphasis` | Markdown bold
+`:markdown_emphasis`        | Markdown italic
+`:markdown_strikethrough`   | Markdown Extra strikethrough
+`:hashtags`                 | Hashtags
+`:autolinks`                | Automatically detect links
+`:emoji`                    | GitHub-style named emoji
+`:html`                     | Generate HTML representations for entities and the entire string
 
 Everything is enabled by deafult. If you don't want to extract Markdown, you should call the extractor this like:
 

@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
 module Quesadilla
+  # Extract entities from text
   class Extractor
     require 'quesadilla/core_ext/string'
     Dir[File.expand_path('../extractor/*.rb', __FILE__)].each { |f| require f }
@@ -11,21 +12,17 @@ module Quesadilla
     include HTML
     include Markdown
 
-    # Invisible character from the reserved range replaces markdown we've already parsed.
-    REPLACE_TOKEN = "\uf042"
-
+    # @return [Hash] default extractor options
     def self.default_options
       {
         :markdown => true,
         :markdown_code => true,
         :markdown_links => true,
-        :markdown_bold_italic => true,
-        :markdown_bold => true,
-        :markdown_italic => true,
+        :markdown_triple_emphasis => true,
+        :markdown_double_emphasis => true,
+        :markdown_emphasis => true,
         :markdown_strikethrough => true,
         :hashtags => true,
-        :hashtag_url_format => '#hashtag-HASHTAG',
-        :hashtag_class_name => 'hashtag',
         :autolinks => true,
         :emoji => true,
         :html => true,
@@ -33,11 +30,27 @@ module Quesadilla
       }
     end
 
+    # @param options [Hash] an optional options hash. Defaults to `Quesadilla::Extractor.default_options`.
+    # @option options [Boolean] Should extract Markdown. Defaults to `true`.
+    # @option options markdown_code [Boolean] Should extract Markdown code. Defaults to `true`.
+    # @option options markdown_links [Boolean] Should extract Markdown links. Defaults to `true`.
+    # @option options markdown_triple_emphasis [Boolean] Should extract Markdown triple emphasis (bold italic). Defaults to `true`.
+    # @option options markdown_double_emphasis [Boolean] Should extract Markdown double emphasis (bold). Defaults to `true`.
+    # @option options markdown_emphasis [Boolean] Should extract Markdown emphasis (italic). Defaults to `true`.
+    # @option options markdown_strikethrough [Boolean] Should extract Markdown strikethrough. Defaults to `true`.
+    # @option options hashtags [Boolean] Should extract hashtags. Defaults to `true`.
+    # @option options autolinks [Boolean] Should automatically detect links. Defaults to `true`.
+    # @option options emoji [Boolean] Should extract named emoji. Defaults to `true`.
+    # @option options html [Boolean] Should generate HTML. Defaults to `true`.
+    # @option options html_renderer [Class] class to use as HTML renderer. Defaults to `Quesadilla::HTMLRenderer`.
     def initialize(options = {})
       @options = self.class.default_options.merge(options)
       @renderer = @options[:html_renderer].new if @options[:html]
     end
 
+    # Extract entities from text
+    # @param original_text the text to extract from
+    # @return [Hash] hash containing the display text, html text, and entities
     def extract(original_text)
       @original_text = original_text.dup
 
@@ -70,6 +83,9 @@ module Quesadilla
     end
 
   private
+
+    # Invisible character from the reserved range replaces markdown we've already parsed.
+    REPLACE_TOKEN = "\uf042".freeze
 
     def display_url(url)
       url = url.gsub(/(?:https?:\/\/)?(?:www\.)?/i, '').q_truncate(32, omission: '…')

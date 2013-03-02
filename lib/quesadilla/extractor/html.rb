@@ -2,7 +2,12 @@
 
 module Quesadilla
   class Extractor
+    # Convert entites and entire string to HTML.
+    #
+    # This module has no public methods.
     module HTML
+    private
+
       HTML_ESCAPE_MAP = [
         {
            pattern: '&',
@@ -34,7 +39,7 @@ module Quesadilla
            text: '&#x2F;',
            placeholder: "\uf055",
         }
-      ]
+      ].freeze
 
       def display_html(display_text, entities)
          return html_escape(display_text) unless entities and entities.length > 0

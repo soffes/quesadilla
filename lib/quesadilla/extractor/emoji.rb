@@ -2,11 +2,16 @@
 
 module Quesadilla
   class Extractor
+    # Extract named emoji.
+    #
+    # This module has no public methods.
     module Emoji
+    private
+
       require 'named_emoji'
 
       # Emoji colon-syntax regex
-      EMOJI_COLON_REGEX = %r{:([a-zA-Z0-9_\-\+]+):}
+      EMOJI_COLON_REGEX = %r{:([a-zA-Z0-9_\-\+]+):}.freeze
 
       def replace_emoji
         codes = {}

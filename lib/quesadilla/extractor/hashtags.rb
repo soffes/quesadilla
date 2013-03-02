@@ -2,7 +2,12 @@
 
 module Quesadilla
   class Extractor
+    # Extract hashtags.
+    #
+    # This module has no public methods.
     module Hashtags
+    private
+
       require 'twitter-text'
 
       def extract_hashtags

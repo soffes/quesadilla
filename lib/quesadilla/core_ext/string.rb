@@ -1,5 +1,11 @@
+# String additions
 class String
-  # From ActiveSupport
+  # Truncate method from ActiveSupport.
+  # @param truncate_at [Fixnum] number of characters to truncate after
+  # @param options [Hash] optional options hash
+  # @option options separator [String] truncate text only at a certain separator strings
+  # @option options omission [String] string to add at the end to endicated truncated text. Defaults to '...'
+  # @return [String] truncated string
   def q_truncate(truncate_at, options = {})
     return dup unless length > truncate_at
 

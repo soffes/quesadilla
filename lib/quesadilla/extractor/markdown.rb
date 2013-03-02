@@ -2,7 +2,12 @@
 
 module Quesadilla
   class Extractor
+    # Extract Markdown
+    #
+    # This module has no public methods.
     module Markdown
+    private
+
       # Gruber's regex is recursive, but I can't figure out how to do it in Ruby without the `g` option.
       # Maybe I should use StringScanner instead. For now, I think it's fine. Everything appears to work
       # as expected.
@@ -10,7 +15,7 @@ module Quesadilla
         (?>
            [^\[\]]+
         )*
-      }x
+      }x.freeze
 
       # 2 = Text, 3 = URL, 6 = Title
       LINK_REGEX = %r{
@@ -29,10 +34,10 @@ module Quesadilla
           )?
           \)
         )
-      }x
+      }x.freeze
 
       # 1 = URL
-      AUTOLINK_LINK_REGEX = /<((?:https?|ftp):[^'">\s]+)>/i
+      AUTOLINK_LINK_REGEX = /<((?:https?|ftp):[^'">\s]+)>/i.freeze
 
       # 1 = Email
       AUTOLINK_EMAIL_REGEX = %r{
@@ -44,22 +49,22 @@ module Quesadilla
           [-a-z0-9]+(?:\.[-a-z0-9]+)*\.[a-z]+
         )
         >
-      }xi
+      }xi.freeze
 
       # 1 = Delimiter, 2 = Text
-      BOLD_ITALIC_REGEX = %r{ (\*\*\*|___) (?=\S) (.+?[*_]*) (?<=\S) \1 }x
+      BOLD_ITALIC_REGEX = %r{ (\*\*\*|___) (?=\S) (.+?[*_]*) (?<=\S) \1 }x.freeze
 
       # 1 = Delimiter, 2 = Text
-      BOLD_REGEX = %r{ (\*\*|__) (?=\S) (.+?[*_]*) (?<=\S) \1 }x
+      BOLD_REGEX = %r{ (\*\*|__) (?=\S) (.+?[*_]*) (?<=\S) \1 }x.freeze
 
       # 1 = Delimiter, 2 = Text
-      ITALIC_REGEX = %r{ (\*|_) (?=\S) (.+?) (?<=\S) \1 }x
+      ITALIC_REGEX = %r{ (\*|_) (?=\S) (.+?) (?<=\S) \1 }x.freeze
 
       # 1 = Delimiter, 2 = Text
-      STRIKETHROUGH_REGEX = %r{ (~~) (?=\S) (.+?[~]*) (?<=\S) \1 }x
+      STRIKETHROUGH_REGEX = %r{ (~~) (?=\S) (.+?[~]*) (?<=\S) \1 }x.freeze
 
       # 1 = Delimiter, 2 = Text
-      CODE_REGEX = %r{ (`+) (.+?) (?<!`) \1 (?!`) }x
+      CODE_REGEX = %r{ (`+) (.+?) (?<!`) \1 (?!`) }x.freeze
 
       def extract_markdown
         extract_markdown_code if @options[:markdown_code]
@@ -70,9 +75,9 @@ module Quesadilla
           extract_markdown_links
         end
 
-        extract_markdown_span(BOLD_ITALIC_REGEX, ENTITY_TYPE_TRIPLE_EMPHASIS) if @options[:markdown_bold_italic]
-        extract_markdown_span(BOLD_REGEX, ENTITY_TYPE_DOUBLE_EMPHASIS) if @options[:markdown_bold]
-        extract_markdown_span(ITALIC_REGEX, ENTITY_TYPE_EMPHASIS) if @options[:markdown_italic]
+        extract_markdown_span(BOLD_ITALIC_REGEX, ENTITY_TYPE_TRIPLE_EMPHASIS) if @options[:markdown_triple_emphasis]
+        extract_markdown_span(BOLD_REGEX, ENTITY_TYPE_DOUBLE_EMPHASIS) if @options[:markdown_double_emphasis]
+        extract_markdown_span(ITALIC_REGEX, ENTITY_TYPE_EMPHASIS) if @options[:markdown_emphasis]
         extract_markdown_span(STRIKETHROUGH_REGEX, ENTITY_TYPE_STRIKETHROUGH) if @options[:markdown_strikethrough]
       end
 

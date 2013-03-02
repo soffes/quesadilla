@@ -2,7 +2,12 @@
 
 module Quesadilla
   class Extractor
+    # Extract plain links.
+    #
+    # This module has no public methods.
     module Autolinks
+    private
+
       require 'twitter-text'
 
       def extract_autolinks
