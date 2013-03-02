@@ -6,6 +6,7 @@ See the [Cheddar text guide](https://cheddarapp.com/text) for more information a
 
 Quesadilla's API is fully documented. Read the [online documentation](http://rubydoc.info/github/soffes/quesadilla/master/frames).
 
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -21,6 +22,7 @@ And then execute:
 Or install it yourself as:
 
     $ gem install quesadilla
+
 
 ## Usage
 
@@ -60,9 +62,11 @@ Option                      | Description
 `:hashtags`                 | Hashtags
 `:autolinks`                | Automatically detect links
 `:emoji`                    | GitHub-style named emoji
+`:users`                    | User mentions
+`:user_validator`           | Callable object to validate usernames
 `:html`                     | Generate HTML representations for entities and the entire string
 
-Everything is enabled by deafult. If you don't want to extract Markdown, you should call the extractor this like:
+Everything is enabled by deafult except user mentions. If you don't want to extract Markdown, you should call the extractor this like:
 
 ``` ruby
 Quesadilla.extract('Some text', markdown: false)
@@ -91,11 +95,27 @@ extraction[:display_html] #=> 'Some <a href="http://example.com/tags/awesome" cl
 
 Take a look at [Quesadilla::HTMLRenderer](lib/quesadilla/html_renderer.html) for more details on creating a custom renderer.
 
+### Users
+
+To enable user mention extraction, pass `users: true` as an option. You can optionally pass a callable object to validate a username. Here's a quick example:
+
+``` ruby
+validator = lambda do |username|
+  User.where('LOWER(username) = ?', username.downcase).first.try(:id)
+end
+
+extraction = extract('Real @soffes and fake @nobody', users: true, user_validator: validator)
+```
+
+Assuming there is a user named `soffes` in your database, it would extract `@soffes`. Assuming there isn't a user named `nobody`, that would remain plain text. Obviously feel free to do whatever you want here. Quesadilla makes no assumptions about your user system.
+
+
 ## Supported Ruby Versions
 
 Quesadilla is tested under 1.9.3, 2.0.0, and JRuby (1.9 mode).
 
 [![Build Status](https://travis-ci.org/soffes/quesadilla.png?branch=master)](https://travis-ci.org/soffes/quesadilla)
+
 
 ## Contributing
 

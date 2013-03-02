@@ -2,7 +2,7 @@
 
 module Quesadilla
   class Extractor
-    # Extract Markdown
+    # Extract Markdown.
     #
     # This module has no public methods.
     module Markdown

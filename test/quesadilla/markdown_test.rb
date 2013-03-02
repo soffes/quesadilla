@@ -5,7 +5,7 @@ module Quesadilla
   class MarkdownTest < TestCase
     def test_that_it_extracts_links
       extraction = extract('Read [my resume](http://samsoff.es/resume) if you want')
-      assert_equal extraction, {
+      expected = {
         display_text: 'Read my resume if you want',
         display_html: 'Read <a href="http://samsoff.es/resume" rel="external nofollow" class="link">my resume</a> if you want',
         entities: [
@@ -19,11 +19,12 @@ module Quesadilla
           }
         ]
       }
+      assert_equal expected, extraction
     end
 
     def test_that_it_extracts_links_with_titles
       extraction = extract('Read [my resume](http://samsoff.es/resume "Sam\'s Resume") if you want')
-      assert_equal extraction, {
+      expected = {
         display_text: 'Read my resume if you want',
         display_html: 'Read <a href="http://samsoff.es/resume" rel="external nofollow" class="link" title="Sam&#x27;s Resume">my resume</a> if you want',
         entities: [
@@ -38,11 +39,12 @@ module Quesadilla
           }
         ]
       }
+      assert_equal expected, extraction
     end
 
     def test_that_it_extracts_links_with_brackets
       extraction = extract('Something with a link: <http://samsoff.es/posts/hire-sam>')
-      assert_equal extraction, {
+      expected = {
         display_text: 'Something with a link: samsoff.es/posts/hire-sam',
         display_html: 'Something with a link: <a href="http://samsoff.es/posts/hire-sam" rel="external nofollow" class="link">samsoff.es&#x2F;posts&#x2F;hire-sam</a>',
         entities: [
@@ -56,11 +58,12 @@ module Quesadilla
           }
         ]
       }
+      assert_equal expected, extraction
     end
 
     def test_that_it_extracts_email_addresses_with_brackets
       extraction = extract('Email <support@cheddarapp.com>')
-      assert_equal extraction, {
+      expected = {
         display_text: 'Email support@cheddarapp.com',
         display_html: 'Email <a href="mailto:support@cheddarapp.com" rel="external nofollow" class="link">support@cheddarapp.com</a>',
         entities: [
@@ -74,13 +77,14 @@ module Quesadilla
           }
         ]
       }
+      assert_equal expected, extraction
     end
 
     # it 'should extract plain email addresses'
 
     def test_that_it_extracts_emphasis
       extraction = extract('Something *cool* is awesome')
-      assert_equal extraction, {
+      expected = {
         display_text: 'Something cool is awesome',
         display_html: 'Something <em>cool</em> is awesome',
         entities: [
@@ -93,9 +97,10 @@ module Quesadilla
           }
         ]
       }
+      assert_equal expected, extraction
 
       extraction = extract('Something _cool_ is awesome')
-      assert_equal extraction, {
+      expected = {
         display_text: 'Something cool is awesome',
         display_html: 'Something <em>cool</em> is awesome',
         entities: [
@@ -108,11 +113,12 @@ module Quesadilla
           }
         ]
       }
+      assert_equal expected, extraction
     end
 
     def test_that_it_extracts_double_emphasis
       extraction = extract('Something **cool** is awesome')
-      assert_equal extraction, {
+      expected = {
         display_text: 'Something cool is awesome',
         display_html: 'Something <strong>cool</strong> is awesome',
         entities: [
@@ -125,9 +131,10 @@ module Quesadilla
           }
         ]
       }
+      assert_equal expected, extraction
 
       extraction = extract('Something __cool__ is awesome')
-      assert_equal extraction, {
+      expected = {
         display_text: 'Something cool is awesome',
         display_html: 'Something <strong>cool</strong> is awesome',
         entities: [
@@ -140,11 +147,12 @@ module Quesadilla
           }
         ]
       }
+      assert_equal expected, extraction
     end
 
     def test_that_it_extracts_triple_emphasis
       extraction = extract('Something ***cool*** is awesome')
-      assert_equal extraction, {
+      expected = {
         display_text: 'Something cool is awesome',
         display_html: 'Something <strong><em>cool</em></strong> is awesome',
         entities: [
@@ -157,9 +165,10 @@ module Quesadilla
           }
         ]
       }
+      assert_equal expected, extraction
 
       extraction = extract('Something ___cool___ is awesome')
-      assert_equal extraction, {
+      expected = {
         display_text: 'Something cool is awesome',
         display_html: 'Something <strong><em>cool</em></strong> is awesome',
         entities: [
@@ -172,11 +181,12 @@ module Quesadilla
           }
         ]
       }
+      assert_equal expected, extraction
     end
 
     def test_that_it_extracts_strikethrough
       extraction = extract('Something ~~cool~~ awesome')
-      assert_equal extraction, {
+      expected = {
         display_text: 'Something cool awesome',
         display_html: 'Something <del>cool</del> awesome',
         entities: [
@@ -189,11 +199,12 @@ module Quesadilla
           }
         ]
       }
+      assert_equal expected, extraction
     end
 
     def test_that_it_extracts_multiple_strikethroughs
       extraction = extract('Something ~~cool~~ awesome ~~foo~~')
-      assert_equal extraction, {
+      expected = {
         display_text: 'Something cool awesome foo',
         display_html: 'Something <del>cool</del> awesome <del>foo</del>',
         entities: [
@@ -213,11 +224,12 @@ module Quesadilla
           }
         ]
       }
+      assert_equal expected, extraction
     end
 
     def test_that_it_extracts_code
       extraction = extract('Something with `code` is awesome')
-      assert_equal extraction, {
+      expected = {
         display_text: 'Something with code is awesome',
         display_html: 'Something with <code>code</code> is awesome',
         entities: [
@@ -230,6 +242,7 @@ module Quesadilla
           }
         ]
       }
+      assert_equal expected, extraction
     end
   end
 end

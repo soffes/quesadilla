@@ -14,5 +14,5 @@ Dir["#{File.expand_path(File.dirname(__FILE__))}/support/*.rb"].each do |file|
 end
 
 class Quesadilla::TestCase < MiniTest::Unit::TestCase
-  include ExtractorMacros
+  include Quesadilla
 end

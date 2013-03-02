@@ -68,6 +68,8 @@ module Quesadilla
           @renderer.code(display_text)
         when ENTITY_TYPE_HASHTAG
           @renderer.hashtag(display_text, html_pre_escape(entity[:hashtag]))
+        when ENTITY_TYPE_USER
+          @renderer.user(display_text, html_pre_escape(entity[:username]), html_pre_escape(entity[:user_id]))
         when ENTITY_TYPE_LINK
           @renderer.link(display_text, entity[:url], html_pre_escape(entity[:title]))
         else
@@ -81,7 +83,7 @@ module Quesadilla
       def html_pre_escape(string)
          return '' unless string
          HTML_ESCAPE_MAP.each do |escape|
-           string = string.gsub(escape[:pattern], escape[:placeholder])
+           string = string.to_s.gsub(escape[:pattern], escape[:placeholder])
          end
          string
       end
@@ -96,7 +98,7 @@ module Quesadilla
 
       def html_escape(string)
         return '' unless string
-        string.gsub(/&/, '&amp;').gsub(/</, '&lt;').gsub(/>/, '&gt;').gsub(/"/, '&quot;').gsub(/'/, '&#x27;').gsub(/\//, '&#x2F;')
+        string.to_s.gsub(/&/, '&amp;').gsub(/</, '&lt;').gsub(/>/, '&gt;').gsub(/"/, '&quot;').gsub(/'/, '&#x27;').gsub(/\//, '&#x2F;')
       end
     end
   end

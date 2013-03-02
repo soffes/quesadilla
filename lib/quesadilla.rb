@@ -22,8 +22,13 @@ module Quesadilla
   # Hashtag entity type
   ENTITY_TYPE_HASHTAG = 'hashtag'.freeze
 
+  # User entity type
+  ENTITY_TYPE_USER = 'user'.freeze
+
   # Link entity type
   ENTITY_TYPE_LINK = 'link'.freeze
+
+module_function
 
   # Extract entities from text
   # @param text the text to extract
@@ -39,7 +44,7 @@ module Quesadilla
   # @option options html [Boolean] Should generate HTML. Defaults to `true`.
   # @option options html_renderer [Class] class to use as HTML renderer. Defaults to `Quesadilla::HTMLRenderer`.
   # @return [Hash] hash containing the display text, html text, and entities
-  def self.extract(text, options = {})
+  def extract(text, options = {})
     Extractor.new(options).extract(text)
   end
 end

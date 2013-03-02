@@ -5,7 +5,7 @@ module Quesadilla
   class MultiTest < TestCase
     def test_that_it_extracts_links_and_tags
       extraction = extract('Something #tagged with a link http://samsoff.es/posts/hire-sam')
-      assert_equal extraction, {
+      expected = {
         display_text: 'Something #tagged with a link samsoff.es/posts/hire-sam',
         display_html: 'Something <a href="#hashtag-tagged" class="hashtag">#tagged</a> with a link <a href="http://samsoff.es/posts/hire-sam" rel="external nofollow" class="link">samsoff.es&#x2F;posts&#x2F;hire-sam</a>',
         entities: [
@@ -27,11 +27,12 @@ module Quesadilla
           }
         ]
       }
+      assert_equal expected, extraction
     end
 
     def test_that_it_doesnt_lose_the_last_character
       extraction = extract('Something that is **bold**?')
-      assert_equal extraction, {
+      expected = {
         display_text: 'Something that is bold?',
         display_html: 'Something that is <strong>bold</strong>?',
         entities: [
@@ -44,9 +45,10 @@ module Quesadilla
           }
         ]
       }
+      assert_equal expected, extraction
 
       extraction = extract('Something that is **bold**')
-      assert_equal extraction, {
+      expected = {
         display_text: 'Something that is bold',
         display_html: 'Something that is <strong>bold</strong>',
         entities: [
@@ -59,6 +61,7 @@ module Quesadilla
           }
         ]
       }
+      assert_equal expected, extraction
     end
   end
 end

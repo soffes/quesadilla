@@ -5,16 +5,17 @@ module Quesadilla
   class EmojiTest < TestCase
     def test_that_it_supports_emoji
       extraction = extract('Something with 👨 beardface')
-      assert_equal extraction, {
+      expected = {
         display_text: 'Something with 👨 beardface',
         display_html: 'Something with 👨 beardface',
         entities: []
       }
+      assert_equal expected, extraction
     end
 
     def test_that_it_supports_emoji_with_other_entities
       extraction = extract('Something #tagged with 👨 beardface')
-      assert_equal extraction, {
+      expected = {
         display_text: 'Something #tagged with 👨 beardface',
         display_html: 'Something <a href="#hashtag-tagged" class="hashtag">#tagged</a> with 👨 beardface',
         entities: [
@@ -28,9 +29,10 @@ module Quesadilla
           }
         ]
       }
+      assert_equal expected, extraction
 
       extraction = extract('After 💇 #foo 👮 **Yep**')
-      assert_equal extraction, {
+      expected = {
         display_text: 'After 💇 #foo 👮 Yep',
         display_html: 'After 💇 <a href="#hashtag-foo" class="hashtag">#foo</a> 👮 <strong>Yep</strong>',
         entities: [
@@ -51,18 +53,20 @@ module Quesadilla
           }
         ]
       }
+      assert_equal expected, extraction
     end
 
     def test_that_it_support_the_colon_syntax
       extraction = extract('Beardface is :man:')
-      assert_equal extraction, {
+      expected = {
         display_text: 'Beardface is 👨',
         display_html: 'Beardface is 👨',
         entities: []
       }
+      assert_equal expected, extraction
 
       extraction = extract('Beardface is `not here :man:` :man:')
-      assert_equal extraction, {
+      expected = {
         display_text: 'Beardface is not here :man: 👨',
         display_html: 'Beardface is <code>not here :man:</code> 👨',
         entities: [
@@ -75,9 +79,11 @@ module Quesadilla
           }
         ]
       }
+      assert_equal expected, extraction
 
+      # TODO: This is broken. Original indicies are messed up if a named emoji is before another entity
       # extraction = extract('Something #tagged with :man: **beardface**')
-      # assert_equal extraction, {
+      # expected = {
       #   display_text: 'Something #tagged with 👨 beardface',
       #   display_html: 'Something <a href="#hashtag-tagged" class="hashtag">#tagged</a> with 👨 <strong>beardface</strong>',
       #   entities: [
@@ -98,6 +104,7 @@ module Quesadilla
       #     }
       #   ]
       # }
+      # assert_equal expected, extraction
     end
   end
 end
