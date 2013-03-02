@@ -4,6 +4,8 @@ Entity-style text parsing. Quesadilla was extracted from [Cheddar](https://chedd
 
 See the [Cheddar text guide](https://cheddarapp.com/text) for more information about how to type entities.
 
+Quesadilla's API is fully documented. Read the [online documentation](http://rubydoc.info/github/soffes/quesadilla/master/frames).
+
 ## Installation
 
 Add this line to your application's Gemfile:
