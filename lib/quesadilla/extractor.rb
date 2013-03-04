@@ -24,6 +24,7 @@ module Quesadilla
         markdown_emphasis: true,
         markdown_strikethrough: true,
         hashtags: true,
+        hashtag_validator: nil,
         autolinks: true,
         emoji: true,
         users: false,
@@ -42,10 +43,11 @@ module Quesadilla
     # @option options markdown_emphasis [Boolean] Should extract Markdown emphasis (italic). Defaults to `true`.
     # @option options markdown_strikethrough [Boolean] Should extract Markdown strikethrough. Defaults to `true`.
     # @option options hashtags [Boolean] Should extract hashtags. Defaults to `true`.
+    # @option options hashtag_validator A callable object to validate a hashtag. This should return `true` or `false`. Invalid hashtags will be left as plain text. If the validator is `nil`, all hashtags will be extracted. Defaults to `nil`.
     # @option options autolinks [Boolean] Should automatically detect links. Defaults to `true`.
     # @option options emoji [Boolean] Should extract named emoji. Defaults to `true`.
     # @option options users [Boolean] Should extract user mentions. Defaults to `false`.
-    # @option options user_validator A callable object to validate a username. This should return the user ID of the user or nil if it is invalid. Invalid users will be left as plain text. If the validator is nil, all usernames will be extracted. Defaults to `nil`.
+    # @option options user_validator A callable object to validate a username. This should return the user ID of the user or nil if it is invalid. Invalid users will be left as plain text. If the validator is `nil`, all usernames will be extracted. Defaults to `nil`.
     # @option options html [Boolean] Should generate HTML. Defaults to `true`.
     # @option options html_renderer [Class] class to use as HTML renderer. Defaults to `Quesadilla::HTMLRenderer`.
     def initialize(options = {})

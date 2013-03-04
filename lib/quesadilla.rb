@@ -39,6 +39,7 @@ module_function
   # @option options markdown_emphasis [Boolean] Should extract Markdown emphasis (italic). Defaults to `true`.
   # @option options markdown_strikethrough [Boolean] Should extract Markdown strikethrough. Defaults to `true`.
   # @option options hashtags [Boolean] Should extract hashtags. Defaults to `true`.
+  # @option options hashtag_validator A callable object to validate a hashtag. This should return `true` or `false`. Invalid hashtags will be left as plain text. If the validator is `nil`, all hashtags will be extracted. Defaults to `nil`.
   # @option options autolinks [Boolean] Should automatically detect links. Defaults to `true`.
   # @option options emoji [Boolean] Should extract named emoji. Defaults to `true`.
   # @option options users [Boolean] Should extract user mentions. Defaults to `false`.

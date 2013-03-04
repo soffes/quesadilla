@@ -12,15 +12,22 @@ module Quesadilla
 
       def extract_hashtags
         Twitter::Extractor::extract_hashtags_with_indices(@working_text).each do |entity|
-          entity_text = "##{entity[:hashtag]}"
+          hashtag = entity[:hashtag]
+
+          # Validate
+          if validator = @options[:hashtag_validator]
+            next unless validator.call(hashtag)
+          end
+
+          display_text = "##{hashtag}"
           @entities << {
             type: ENTITY_TYPE_HASHTAG,
-            text: entity_text,
-            display_text: entity_text,
+            text: display_text,
+            display_text: display_text,
             indices: entity[:indices],
-            hashtag: entity[:hashtag].downcase
+            hashtag: hashtag.downcase
           }
-          @working_text.sub!(entity_text, REPLACE_TOKEN * entity_text.length)
+          @working_text.sub!(display_text, REPLACE_TOKEN * display_text.length)
         end
       end
     end

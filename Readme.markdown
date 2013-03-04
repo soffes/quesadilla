@@ -60,6 +60,7 @@ Option                      | Description
 `:markdown_emphasis`        | Markdown italic
 `:markdown_strikethrough`   | Markdown Extra strikethrough
 `:hashtags`                 | Hashtags
+`:hashtags_validator`           | Callable object to validate hashtags
 `:autolinks`                | Automatically detect links
 `:emoji`                    | GitHub-style named emoji
 `:users`                    | User mentions

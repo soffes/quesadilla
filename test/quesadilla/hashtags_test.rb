@@ -48,5 +48,27 @@ module Quesadilla
       }
       assert_equal expected, extraction
     end
+
+    def test_that_it_validates
+      validator = lambda do |hashtag|
+        hashtag == 'awesome'
+      end
+      extraction = extract('A task with some #tags that are #awesome', hashtag_validator: validator)
+      expected = {
+        display_text: 'A task with some #tags that are #awesome',
+        display_html: 'A task with some #tags that are <a href="#hashtag-awesome" class="hashtag">#awesome</a>',
+        entities: [
+          {
+            type: 'hashtag',
+            text: '#awesome',
+            display_text: '#awesome',
+            hashtag: 'awesome',
+            indices: [32, 40],
+            display_indices: [32, 40]
+          }
+        ]
+      }
+      assert_equal expected, extraction
+    end
   end
 end
