@@ -21,7 +21,7 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = '>= 1.9.2'
 
   # Hashtag and autolink parsing
-  gem.add_dependency 'twitter-text', '~> 1.5.0'
+  gem.add_dependency 'twitter-text', '~> 1.6'
 
   # Emoji detection
   gem.add_dependency 'named_emoji', '~> 1.1.1'

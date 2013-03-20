@@ -16,4 +16,5 @@ group :test do
   gem 'minitest'
   gem 'minitest-wscolor'
   gem 'simplecov', require: false
+  gem 'coveralls', require: false
 end

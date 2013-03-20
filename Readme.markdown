@@ -1,5 +1,7 @@
 # Quesadilla
 
+[![Gem Version](https://badge.fury.io/rb/quesadilla.png)](http://badge.fury.io/rb/quesadilla) [![Build Status](https://travis-ci.org/soffes/quesadilla.png?branch=master)](https://travis-ci.org/soffes/quesadilla) [![Dependency Status](https://gemnasium.com/soffes/quesadilla.png)](https://gemnasium.com/soffes/quesadilla) [![Code Climate](https://codeclimate.com/github/soffes/quesadilla.png)](https://codeclimate.com/github/soffes/quesadilla) [![Coverage Status](https://coveralls.io/repos/soffes/quesadilla/badge.png?branch=master)](https://coveralls.io/r/soffes/quesadilla)
+
 Entity-style text parsing. Quesadilla was extracted from [Cheddar](https://cheddarapp.com).
 
 See the [Cheddar text guide](https://cheddarapp.com/text) for more information about how to type entities.
@@ -114,8 +116,6 @@ Assuming there is a user named `soffes` in your database, it would extract `@sof
 ## Supported Ruby Versions
 
 Quesadilla is tested under 1.9.2, 1.9.3, 2.0.0, JRuby 1.7.2 (1.9 mode), and Rubinius 2.0.0 (1.9 mode).
-
-[![Build Status](https://travis-ci.org/soffes/quesadilla.png?branch=master)](https://travis-ci.org/soffes/quesadilla)
 
 
 ## Contributing

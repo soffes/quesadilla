@@ -2,6 +2,9 @@ require 'rubygems'
 require 'bundler'
 Bundler.require :test
 
+require 'coveralls'
+Coveralls.wear!
+
 require 'simplecov'
 SimpleCov.start
 
