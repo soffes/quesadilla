@@ -1,6 +1,6 @@
 # Quesadilla
 
-[![Gem Version](https://badge.fury.io/rb/quesadilla.png)](http://badge.fury.io/rb/quesadilla) [![Build Status](https://travis-ci.org/soffes/quesadilla.png?branch=master)](https://travis-ci.org/soffes/quesadilla) [![Dependency Status](https://gemnasium.com/soffes/quesadilla.png)](https://gemnasium.com/soffes/quesadilla) [![Code Climate](https://codeclimate.com/github/soffes/quesadilla.png)](https://codeclimate.com/github/soffes/quesadilla) [![Coverage Status](https://coveralls.io/repos/soffes/quesadilla/badge.png?branch=master)](https://coveralls.io/r/soffes/quesadilla)
+[![Build Status](https://travis-ci.org/soffes/quesadilla.png?branch=master)](https://travis-ci.org/soffes/quesadilla) [![Coverage Status](https://coveralls.io/repos/soffes/quesadilla/badge.png?branch=master)](https://coveralls.io/r/soffes/quesadilla) [![Code Climate](https://codeclimate.com/github/soffes/quesadilla.png)](https://codeclimate.com/github/soffes/quesadilla) [![Dependency Status](https://gemnasium.com/soffes/quesadilla.png)](https://gemnasium.com/soffes/quesadilla) [![Gem Version](https://badge.fury.io/rb/quesadilla.png)](http://badge.fury.io/rb/quesadilla)
 
 Entity-style text parsing. Quesadilla was extracted from [Cheddar](https://cheddarapp.com).
 
