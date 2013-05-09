@@ -106,5 +106,12 @@ module Quesadilla
       # }
       # assert_equal expected, extraction
     end
+
+    def test_totally_invalid_emoji
+      bogus_text = 'Q14hMG4vA1RwLU3gQT9ENs7S.jpeg:Amazon:photo'
+      extraction = extract(bogus_text)
+      assert_equal bogus_text, extraction[:display_text]
+      assert_equal [], extraction[:entities]
+    end
   end
 end
