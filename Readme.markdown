@@ -113,6 +113,11 @@ extraction = extract('Real @soffes and fake @nobody', users: true, user_validato
 Assuming there is a user named `soffes` in your database, it would extract `@soffes`. Assuming there isn't a user named `nobody`, that would remain plain text. Obviously feel free to do whatever you want here. Quesadilla makes no assumptions about your user system.
 
 
+### Note
+
+User and hashtag detection use the [twitter-text](https://github.com/twitter/twitter-text-rb) gem. This has some limits that you may not expect such as usernames can't be more than 20 characters and hashtags can't contain certain characters.
+
+
 ## Supported Ruby Versions
 
 Quesadilla is tested under 1.9.2, 1.9.3, 2.0.0, JRuby 1.7.2 (1.9 mode), and Rubinius 2.0.0 (1.9 mode).

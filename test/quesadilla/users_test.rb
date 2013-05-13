@@ -44,7 +44,6 @@ module Quesadilla
         ]
       }
       assert_equal expected, extraction
-
     end
   end
 end
