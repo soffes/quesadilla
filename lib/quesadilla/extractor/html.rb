@@ -50,7 +50,7 @@ module Quesadilla
         end
 
          # Return
-         html_un_pre_escape(html)
+         @renderer.post_process(html_un_pre_escape(html))
       end
 
       def html_entity(entity)

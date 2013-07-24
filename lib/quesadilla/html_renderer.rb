@@ -62,5 +62,11 @@ module Quesadilla
       title_attr = (title && title.length > 0) ? %Q{ title="#{title}"} : ''
       %Q{<a href="#{url}" rel="external nofollow" class="link"#{title_attr}>#{display_text}</a>}
     end
+
+    # Post-process entire HTML string
+    # @return [String] HTML string
+    def post_process(html)
+      html
+    end
   end
 end
