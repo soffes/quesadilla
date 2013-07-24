@@ -13,8 +13,7 @@ end
 
 # Testing dependencies
 group :test do
-  gem 'minitest', '4.7.4'
-  gem 'minitest-wscolor'
+  gem 'minitest'
   gem 'simplecov', require: false
   gem 'coveralls', require: false
 end

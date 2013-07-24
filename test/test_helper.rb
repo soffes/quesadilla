@@ -16,6 +16,6 @@ Dir["#{File.expand_path(File.dirname(__FILE__))}/support/*.rb"].each do |file|
   require file
 end
 
-class Quesadilla::TestCase < MiniTest::Unit::TestCase
+class Quesadilla::TestCase < MiniTest::Test
   include Quesadilla
 end
