@@ -52,22 +52,22 @@ Quesadilla.extract('Some #awesome text')
 
 Quesadilla supports extracting various span-level Markdown features as well as automatically detecting links and GitHub-style named emoji. Here are the list of options you can pass when extracting:
 
-Option                      | Description
-----------------------------|-----------------------------------------------------------------
-`:markdown`                 | All Markdown parsing
-`:markdown_code`            | Markdown code tags
-`:markdown_links`           | Markdown links (including `<http://soff.es>` style links)
-`:markdown_triple_emphasis` | Markdown bold italic
-`:markdown_double_emphasis` | Markdown bold
-`:markdown_emphasis`        | Markdown italic
-`:markdown_strikethrough`   | Markdown Extra strikethrough
-`:hashtags`                 | Hashtags
-`:hashtags_validator`           | Callable object to validate hashtags
-`:autolinks`                | Automatically detect links
-`:emoji`                    | GitHub-style named emoji
-`:users`                    | User mentions
-`:user_validator`           | Callable object to validate usernames
-`:html`                     | Generate HTML representations for entities and the entire string
+Option                      | Description                                                      | Default
+----------------------------|------------------------------------------------------------------|--------
+`:markdown`                 | All Markdown parsing                                             | `true`
+`:markdown_code`            | Markdown code tags                                               | `true`
+`:markdown_links`           | Markdown links (including `<http://soff.es>` style links)        | `true`
+`:markdown_triple_emphasis` | Markdown bold italic                                             | `true`
+`:markdown_double_emphasis` | Markdown bold                                                    | `true`
+`:markdown_emphasis`        | Markdown italic                                                  | `true`
+`:markdown_strikethrough`   | Markdown Extra strikethrough                                     | `true`
+`:hashtags`                 | Hashtags                                                         | `true`
+`:hashtags_validator`       | Callable object to validate hashtags                             | `nil`
+`:autolinks`                | Automatically detect links                                       | `true`
+`:emoji`                    | GitHub-style named emoji                                         | `true`
+`:users`                    | User mentions                                                    | `false`
+`:user_validator`           | Callable object to validate usernames                            | `nil`
+`:html`                     | Generate HTML representations for entities and the entire string | `true`
 
 Everything is enabled by deafult except user mentions. If you don't want to extract Markdown, you should call the extractor this like:
 
